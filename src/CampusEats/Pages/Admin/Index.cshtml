@@ -1,0 +1,44 @@
+@page
+@model CampusEats.Pages.Admin.IndexModel
+
+<div class="text-center">
+
+	<h1 class="display-4">Admin Page</h1>
+	<div class="d-flex justify-content-center flex-column">
+        <br>
+        <h2>
+            Hello ADMIN!
+        <h2>
+        <br>
+        <h3>
+            <a class="text-dark" asp-page="/Admin/Earnings">View Earnings</a>
+        </h3>
+        <br>
+        <h3>
+            <a class="text-dark" asp-page="/Admin/AllOrders">View All Orders</a>
+        </h3>
+        <br>
+        <h3>
+            <a class="text-dark" asp-page="/Admin/ManageUsers">Manage Users</a>
+        </h3>
+        <br>
+        <h3>
+            <a class="text-dark" asp-page="/Admin/ApproveCouriers">Approve Couriers</a>
+        </h3>
+        <br>
+        <h3>
+            <a class="text-dark" asp-page="/Admin/ResetPassword">Reset Password</a>
+        </h3>
+        <br>
+        <div class="col-md-3" style="margin: auto">
+        <form method="post">
+            <br>
+            <div class="form-floating mb-3">
+                <input asp-for="DeliveryFee" class="form-control"/>
+                <label asp-for="DeliveryFee" class="form-label"></label>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+        </div>
+	</div>
+</div>

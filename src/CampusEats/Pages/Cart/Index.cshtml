@@ -1,0 +1,73 @@
+﻿@page
+@model CampusEats.Pages.Cart.CartModel
+@{
+	ViewData["Title"] = "Shopping cart";
+}
+
+<div class="text-center mt-4">
+	<h1 class="display-4 mt-5">Your cart</h1>
+	<div class="text-left">
+		@if (Model.Cart is null)
+		{
+			<p>There is nothing in your cart</p>
+		}
+		else
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Dish</th>
+						<th scope="col">Count</th>
+						<th scope="col">Price</th>
+						<th scope="col">Sum</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.Cart.CartItems)
+					{
+						<tr>
+							<th scope="row">@item.ProductName</th>
+							<td>@item.Count</td>
+							<td>@item.Price.ToString("0.00") kr</td>
+							<td>@string.Format("{0:0.00}", item.Price * item.Count) kr</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<div class="text-center mt-4">
+				<h1 class="display-4 mt-5">Where should the order be delivered</h1>
+				<div class="text-left">
+						<form method="post" class="form mt-5">
+				<div class="mb-3 form-group">
+					<label>Building:</label>
+					<input asp-for="Location.Building" class="form-control" />
+				</div>
+				<div class="mb-3 form-group">
+					<label>Room Number:</label>
+					<input asp-for="Location.RoomNumber" class="form-control" />
+				</div>
+				<div class="mb-3 form-group">
+					<label>Notes:</label>
+					<input asp-for="Location.Notes" class="form-control" />
+				</div>
+				@if (Model.IsAuthenticated)
+				{
+					<button type="submit" class="btn btn-success">Order</button>
+				} else 
+				{
+					<a class="btn btn-primary" href="/Identity/Login">Log in to order</a>
+				}
+				
+				@foreach (var error in Model.Errors)
+				{
+					<div class="text-danger">
+						@error
+					</div>
+				}
+				
+			</form>
+			</div>
+		</div>
+		}
+	</div>
+</div>

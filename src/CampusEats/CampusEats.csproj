@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5315b7f0-ab61-4cbe-bb86-4975099c5406</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\Cart\Events\**" />
+    <Compile Remove="Core\Identity\Dto\**" />
+    <Content Remove="Core\Cart\Events\**" />
+    <Content Remove="Core\Identity\Dto\**" />
+    <EmbeddedResource Remove="Core\Cart\Events\**" />
+    <EmbeddedResource Remove="Core\Identity\Dto\**" />
+    <None Remove="Core\Cart\Events\**" />
+    <None Remove="Core\Identity\Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="6.0.11" />
+    <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
+    <PackageReference Include="SendGrid" Version="9.28.1" />
+    <PackageReference Include="Stripe.net" Version="40.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\Products\Domain\Events\" />
+    <Folder Include="Migrations\CampusEats\" />
+    <Folder Include="Migrations\Identity\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Core\Courier\Events\" />
+    <None Remove="Core\Courier\Handlers\" />
+    <None Remove="Core\Courier\Pipelines\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="IntegrationTests" />
+	</ItemGroup>
+</Project>

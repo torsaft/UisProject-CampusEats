@@ -1,0 +1,16 @@
+﻿@page "{id:Guid}"
+@model CampusEats.Pages.Admin.DeleteModel;
+
+	<h2 class="display-4">Delete user</h2>
+
+@if (Model.UserDto is not null)
+{
+	<p>Do you want to delete the user with the email <strong>@Model.UserDto.Email</strong>?</p>
+	<form method="post" class="mt-5">
+		<input type="hidden" asp-for="UserDto.Id" />
+	<div>
+		<button type="submit" class="btn btn-danger"><i class="bi-trash"></i> Delete</button>
+		<a class="btn btn-secondary" asp-page="ManageUsers">Cancel</a>
+	</div>
+	</form>
+}

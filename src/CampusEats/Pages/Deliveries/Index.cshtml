@@ -1,0 +1,60 @@
+@page 
+@model CampusEats.Pages.Deliveries.CourierIndexModel
+
+@{
+    ViewData["Title"] = "My Earnings";
+}
+
+	<div class="text-left">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Total Orders Delivered</th>
+					<th scope="col">Money earned from Delivery</th>
+					<th scope="col">Tip</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<th scope="row">@Model.TotalDeliveries</th>
+						<td>@Model.TotalMoneyEarned</td>
+						<td>@Model.TotalTipEarned</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="text-center">
+		<br>
+		<h3>
+			<a class="text-dark" asp-page="/Deliveries/Unassigned">View Unassigned Deliveries</a>
+		</h3>
+		<br>
+		<h2 class="display-4">My Deliveries</h2>
+		<div class="text-left">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Building</th>
+						<th scope="col">Room Number</th>
+						<th scope="col">Notes</th>
+						<th scope="col">Tip</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var delivery in Model.DeliveriesAssignedToMe)
+					{
+						<tr>
+							<th scope="row">@delivery.Address.Building</th>
+							<td>@delivery.Address.RoomNumber</td>
+							<td>@delivery.Address.Notes</td>
+							<td>@string.Format("{0:0.00}", delivery.Tip)</td>
+							<td>
+								<a class="btn btn-primary" asp-page="./Details" asp-route-id="@delivery.Id">Details</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>

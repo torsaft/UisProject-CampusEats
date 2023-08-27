@@ -1,0 +1,41 @@
+@page
+@model CampusEats.Pages.Admin.ManageUsersModel
+
+<div class="text-center">
+
+	<h1 class="display-4">Manage Users</h1>
+	<div class="text-left">
+		<table class="table  table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">User ID</th>
+					<th scope="col">Email</th>
+					<th scope="col" class="text-right">Role</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var user in Model.UserDtos)
+				{
+					<tr>
+						<th scope="row">@user.Id</th>
+						<td>@user.Email</td>
+						<td class="text-right">
+                        @foreach(var role in user.Roles ?? new string[0])
+						{
+							<p>@role</p> 
+						}
+						<td>
+							<a class="btn btn-primary" asp-page="EditUser" asp-route-id="@user.Id"><i class="bi-pencil"></i></a>
+						</td>
+						<td>
+							<a class="btn btn-danger" asp-page="DeleteUser" asp-route-id="@user.Id"><i class="bi-trash"></i></a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+@page "/Cart/CheckOut/{sessionId}"
+@model CampusEats.Pages.Cart.CheckOutModel
+@{
+	ViewData["Title"] = "Shopping cart";
+}
+
+<div class="text-center mt-4">	
+	<div class="alert-success">Order was placed</div> 
+	<a class="btn btn-primary" asp-page="/Orders/Index">View your orders</a>
+</div>

@@ -1,0 +1,82 @@
+@page "{id:Guid}"
+@model CampusEats.Pages.Admin.SingleOrderModel
+@{
+    ViewData["Title"] = "Single Order Orders";
+}
+
+<div>
+    <table class="table">
+        <td>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+                <th>Customer Name</th>
+                <th>Amount of items</th>
+                @* <th>ShipperName</th>
+                <th>Invoice Status</th> *@
+            </tr>
+
+            <tr>
+                <td>
+                    @Model.OrderDto.OrderId
+                </td>
+                <td>
+                    @Model.OrderDto.OrderDate
+                </td>
+                <td>
+                    @Model.OrderDto.Status
+                </td>
+                <td>
+                    @Model.OrderDto.CustomerEmail
+                </td>
+                <td>
+                    @Model.OrderDto.OrderLines.Count()
+                </td>
+                @*<td>
+                    @Model.shipperName
+                </td>
+                <td>
+                    @Model.invoiceStatus
+                </td> *@
+            </tr>
+
+
+    </table>
+
+    <table class="table">
+
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price per product</th>
+
+        </tr>
+        @foreach (var orderLine in Model.OrderDto.OrderLines)
+        {
+            <tr>
+                <td>
+                    @orderLine.ProductName
+                </td>
+                <td>
+                    @orderLine.Amount
+                </td>
+                <td>
+                    @orderLine.Price
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        @if (@Model.OrderDto.IsActive)
+        {
+        <form method="POST">
+                <button type="submit" asp-route-Id="@Model.OrderDto.OrderId" class="btn btn-danger">Cancel Order</button>
+        </form>
+        }
+
+    </div>
+
+    <br>
+</div>

@@ -1,0 +1,87 @@
+@page "{id:Guid}"
+@model CampusEats.Pages.Orders.SingleOrderModel
+@{
+    ViewData["Title"] = "Single Order Orders";
+}
+@if(@Model.OrderDto != null)
+{
+<div>
+    <table class="table">
+        <td>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+                <th>Customer Name</th>
+                <th>Amount of items</th>
+                <th>Delivery Fee</th>
+                @* <th>ShipperName</th>
+                <th>Invoice Status</th> *@
+            </tr>
+
+            <tr>
+             
+                <td>
+                        @Model.OrderDto.OrderId
+                </td>
+                <td>
+                        @Model.OrderDto.OrderDate
+                </td>
+                <td>
+                        @Model.OrderDto.Status
+                </td>
+                <td>
+                        @Model.OrderDto.CustomerEmail
+                </td>
+                <td>
+                        @Model.OrderDto.OrderLines.Count()
+                </td>
+                <td>
+                        @Model.OrderDto.DeliveryFee.ToString("C")
+                </td>    
+            </tr>
+    </table>
+
+    <table class="table">
+
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price per product</th>
+
+        </tr>
+            @foreach (var orderLine in Model.OrderDto.OrderLines)
+        {
+            <tr>
+                <td>
+                    @orderLine.ProductName
+                </td>
+                <td>
+                    @orderLine.Amount
+                </td>
+                <td>
+                    @orderLine.Price
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        @if (@Model.OrderDto.IsActive)
+        {
+        <form method="POST">
+            <button asp-page-handler="Cancel" type="submit" asp-route-Id="@Model.OrderDto.OrderId" class="btn btn-danger">Cancel Order</button>
+        </form>
+        }
+        @if (Model.OrderDto.Status == CampusEats.Core.Ordering.Domain.Status.Delivered)
+        {
+		<form method="POST">
+		    <input type="text" asp-for="TipAmount">
+            <button asp-page-handler="Tip" type="submit" asp-route-Id="@Model.OrderDto.OrderId" class="btn btn-success">Tip Courier</button>
+		</form>
+        }
+    </div>
+
+    <br>
+</div>
+}

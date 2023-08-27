@@ -1,0 +1,49 @@
+﻿@page "{id:Guid}"
+@model CampusEats.Pages.Deliveries.DetailsModel
+@{
+}
+<div class="text-center">
+    @foreach(var error in Model.Errors)
+    {
+        <div class="alert alert-danger" role="alert">
+            @error
+        </div>
+    }
+    
+    @if(Model.Delivery != null)
+    {
+        <h1 class="display-4">Your delivery</h1>
+        <div class="text-center">
+            <table class="table">
+                    <tr>
+                        <th scope="col">Delivery ID</th>
+                        <th scope="col">Building</th>
+                        <th scope="col">Room Number</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Tip</th>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">@Model.Delivery.DeliveryId</th>
+                        <td>@Model.Delivery.Address.Building</td>
+                        <td>@Model.Delivery.Address.RoomNumber</td>
+                        <td>@Model.Delivery.Address.Notes</td>
+                        <td>@Model.Delivery.Tip.ToString("0.00")</td>
+                    </tr>
+            </table>
+
+            <p> Order Status: @Model.Delivery.OrderStatus</p>
+            @if (Model.Delivery.NextOrderStatus != null)
+            {
+                <form method="POST">
+                    <button class="btn btn-primary" 
+                        asp-page-handler="MarkNextPhase"
+                        asp-page-deliveryId="Model.Delivery.DeliveryId"
+                    >
+                        Mark as @Model.Delivery.NextOrderStatus
+                    </button>
+                </form>
+            }
+        </div>
+    }
+</div>
