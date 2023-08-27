@@ -1,5 +1,8 @@
 # CampusEats project
+This is a project from the class "DAT240 Advanced Programming". My group received the grad B for our work. 
+For more information read the Project report. 
 
+### Instructions 
 To run the application, just run "docker-compose up -d" in this folder.
 
 Default admin login information is on the login page. 
